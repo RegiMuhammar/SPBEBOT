@@ -1,0 +1,5 @@
+- streamlit ui udah jadi mvp, tinggal di rework dan polesin
+- buat 2 prompting
+- buat fewshot example (3)
+- prompting for extracting the SPBE pdf
+- 

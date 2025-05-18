@@ -1,0 +1,15 @@
+langchain 
+langchain-core
+langchain-community
+langchain-ollama
+langchain-groq
+python-dotenv
+streamlit
+streamlit-option-menu
+streamlit-navigation-bar
+matplotlib
+pandas
+numpy
+chroma
+chromadb
+pypdf

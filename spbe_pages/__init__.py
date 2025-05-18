@@ -1,0 +1,6 @@
+from spbe_pages.about_spbe import show_about_spbe
+from spbe_pages.chatbot_spbe import show_chatbot
+from spbe_pages.documents_spbe import show_documents
+from spbe_pages.hasil_penelitian import show_research_results
+from spbe_pages.template_prompt import show_prompt_template 
+from spbe_pages.dashboard_spbe import show_dashboard
