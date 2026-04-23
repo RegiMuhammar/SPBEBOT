@@ -114,7 +114,7 @@ def _load_exported_graph_cached(path_str: str) -> nx.MultiDiGraph | None:
 class GraphService:
     def __init__(self) -> None:
         self.settings = get_settings()
-        self.exported_graph_path = self.settings.api_dir / "app" / "data" / "neo4j_graph.json"
+        self.exported_graph_path = self._resolve_exported_graph_path()
         self.vector_service = VectorService() if self.settings.pinecone_api_key else None
         self.llm = None
         if self.settings.groq_api_key:
@@ -123,6 +123,18 @@ class GraphService:
                 temperature=0,
                 groq_api_key=self.settings.groq_api_key,
             )
+
+    def _resolve_exported_graph_path(self) -> Path:
+        candidates = [
+            self.settings.api_dir / "api" / "data" / "neo4j_graph.json",
+            self.settings.api_dir / "app" / "data" / "neo4j_graph.json",
+            self.settings.app_root / "app" / "data" / "neo4j_graph.json",
+            self.settings.app_root / "data" / "neo4j_graph.json",
+        ]
+        for candidate in candidates:
+            if candidate.exists():
+                return candidate
+        return candidates[0]
 
     def _load_exported_graph(self) -> nx.MultiDiGraph | None:
         return _load_exported_graph_cached(str(self.exported_graph_path.resolve()))
