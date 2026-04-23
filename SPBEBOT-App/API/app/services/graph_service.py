@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-import re
 import json
+import re
 from pathlib import Path
 from collections import Counter
 from functools import cached_property, lru_cache
@@ -12,6 +12,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain_groq import ChatGroq
 
 from app.core.config import get_settings
+from app.data.neo4j_graph_payload import GRAPH_PAYLOAD
 from app.services.vector_service import VectorService
 
 
@@ -76,13 +77,7 @@ CATEGORY_BOOSTS = {
     "question": 1.0,
 }
 
-@lru_cache(maxsize=1)
-def _load_exported_graph_cached(path_str: str) -> nx.MultiDiGraph | None:
-    path = Path(path_str)
-    if not path.exists():
-        return None
-
-    payload = json.loads(path.read_text(encoding="utf-8"))
+def _graph_from_payload(payload: dict) -> nx.MultiDiGraph:
     graph = nx.MultiDiGraph()
 
     for node in payload.get("nodes", []):
@@ -110,11 +105,17 @@ def _load_exported_graph_cached(path_str: str) -> nx.MultiDiGraph | None:
     return graph
 
 
+@lru_cache(maxsize=1)
+def _load_exported_graph_cached(payload_key: str) -> nx.MultiDiGraph | None:
+    if payload_key != "embedded":
+        return None
+    return _graph_from_payload(GRAPH_PAYLOAD)
+
+
 
 class GraphService:
     def __init__(self) -> None:
         self.settings = get_settings()
-        self.exported_graph_path = self._resolve_exported_graph_path()
         self.vector_service = VectorService() if self.settings.pinecone_api_key else None
         self.llm = None
         if self.settings.groq_api_key:
@@ -124,20 +125,8 @@ class GraphService:
                 groq_api_key=self.settings.groq_api_key,
             )
 
-    def _resolve_exported_graph_path(self) -> Path:
-        candidates = [
-            self.settings.api_dir / "api" / "data" / "neo4j_graph.json",
-            self.settings.api_dir / "app" / "data" / "neo4j_graph.json",
-            self.settings.app_root / "app" / "data" / "neo4j_graph.json",
-            self.settings.app_root / "data" / "neo4j_graph.json",
-        ]
-        for candidate in candidates:
-            if candidate.exists():
-                return candidate
-        return candidates[0]
-
     def _load_exported_graph(self) -> nx.MultiDiGraph | None:
-        return _load_exported_graph_cached(str(self.exported_graph_path.resolve()))
+        return _load_exported_graph_cached("embedded")
 
     @cached_property
     def indicator_details(self) -> dict[int, str]:
