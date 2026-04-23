@@ -17,6 +17,7 @@
 *.crt
 *.cer
 *.kdbx
+regguy_Neo4j-*.txt
 
 # -------------------------
 # OS / Editor
