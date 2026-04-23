@@ -1,0 +1,45 @@
+.env
+__pycache__/
+data
+chroma_spbe_parent_db
+
+# Dependency directories
+node_modules/
+**/node_modules/
+
+# Python virtual environments
+.venv/
+venv/
+env/
+envspbe/
+spbevenv/
+**/.venv/
+
+# Build and tool caches
+dist/
+build/
+.vite/
+**/.vite/
+
+# Logs and local runtime artifacts
+*.log
+*.pid
+*.tmp
+
+# Notebooks cache
+.ipynb_checkpoints/
+
+# Local databases / vector stores / graph stores (regeneratable)
+db/
+docstore/
+chroma_spbe_parent_db/
+chroma_spbe_parent_vector_db/
+new_chroma_spbe_parent_vector_db/
+new2_chroma_spbe_parent_vector_db/
+local_neo4j/
+local_neo4j_enterprise/
+
+# Python artifacts
+*.pyc
+*.pyo
+*.pyd

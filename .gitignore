@@ -1,0 +1,97 @@
+# =========================================================
+# Global ignore for SPBEBOT monorepo
+# =========================================================
+
+# -------------------------
+# Secrets / credentials
+# -------------------------
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.kdbx
+
+# -------------------------
+# OS / Editor
+# -------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+
+# -------------------------
+# Logs / temp files
+# -------------------------
+*.log
+*.pid
+*.tmp
+*.temp
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# -------------------------
+# Python
+# -------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+envspbe/
+spbevenv/
+
+# -------------------------
+# Node / Frontend
+# -------------------------
+node_modules/
+.npm/
+.pnpm-store/
+.yarn/
+.turbo/
+.vite/
+dist/
+build/
+coverage/
+
+# -------------------------
+# Runtime / generated data
+# -------------------------
+run/
+SPBEBOT-App/run/
+
+# Local vector stores / graph DB / heavy experiment data
+SPBEBOT-Eksperiment/db/
+SPBEBOT-Eksperiment/docstore/
+SPBEBOT-Eksperiment/data/
+SPBEBOT-Eksperiment/local_neo4j/
+SPBEBOT-Eksperiment/local_neo4j_enterprise/
+SPBEBOT-Eksperiment/chroma_spbe_parent_db/
+SPBEBOT-Eksperiment/chroma_spbe_parent_vector_db/
+SPBEBOT-Eksperiment/new_chroma_spbe_parent_vector_db/
+SPBEBOT-Eksperiment/new2_chroma_spbe_parent_vector_db/
+
+# Backup artifacts
+*.backup
+*.dump

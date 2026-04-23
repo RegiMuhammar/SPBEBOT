@@ -1,0 +1,1 @@
+"""SPBEBOT FastAPI application package."""

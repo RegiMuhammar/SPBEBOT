@@ -1,0 +1,24 @@
+- streamlit ui udah jadi mvp, tinggal di rework dan polesin
+- buat 2 prompting
+- buat fewshot example (3)
+- prompting for extracting the SPBE pdf
+- 
+
+
+prompt llamaparse markdown:
+"""
+ini adalah dokumen pedoman Sistem Pemerintahan Berbasis Elektronik (SPBE). Didalamnya ada 4 Domain yang disingkat D (contoh: D1,D2,D3,D4), lalu ada 8 Aspek yang disingkat A (contoh: A2, A5) dan 47 Indikator yang disingkat ID (contoh: ID-3, ID-23). jadi struktur dari SPBE ada 3 unsur tadi domain, aspek, dan indikator, dan penilaian indikator ada kriteria level nya yaitu level 1-5,  dengan level 5 paling tinggi nya.
+
+akan ada perlakuan khusus saat kamu extract table pedoman SPBE ini:
+1. pada table tingkat pertama yaitu penjelasan kuesioner Domain, Aspek, dan Indikator keberapa nya, dari penjelasan, deskripsi indikator, ketentuan penilaian, dan contoh bukti dukung. ini harus dalam 1 tingkatan markdown
+2. pada table tingkat kedua yaitu penjelasan kriteria level dari suatu indikator, kriteria pemenuhan Level, kriteria bukti dukung, tolong bagi seperti itu pada tingkatan table ini
+"""
+
+simpan output chatbot opsi pake json
+untuk simpan chat pake session nama dan 
+
+
+Neo4J Desktop:
+Name: SPBE_Graph
+Password: 123SkripsiSPBEGraph
+Versi: 5.24.0
